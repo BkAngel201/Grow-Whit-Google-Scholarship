@@ -1,0 +1,56 @@
+/* add your CSS here */
+body {
+  font-family: Arial, Helvetica;
+  font-size: 13px;
+  color: #333;
+}
+.interesting-facts {
+  font-style: italic;
+}
+.data-caption {
+  font-weight: 900;
+}
+ul {
+  list-style: none;
+  padding-left: 0;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  padding: 10px 0;
+}
+h3 , img , .animal-info {
+  border: 1px solid #000;
+  margin: 0 10px;
+}
+.green-background {
+  background: #d5eeea;
+}
+.orange-background {
+  background: #f2f2ea;
+}
+.content {
+  width: 322px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  margin: 0 auto;
+  box-shadow: 0px 0px 20px #555;
+}
+h3 {
+  padding: 10px 0 8px 10px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.animal-info {
+  padding: 10px;
+  padding-bottom: 0;
+  margin-top: 2px;
+  margin-bottom: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.interesting-facts {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: .9em;
+}
