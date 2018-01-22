@@ -1,7 +1,8 @@
 //setting the starter value of the variables
-var colorPickerElement = $('#colorPicker');
-var gridHeightElement = $('#input_height');
-var gridWidthElement = $('#input_width');
+const colorPickerElement = $('#colorPicker');
+const gridHeightElement = $('#input_height');
+const gridWidthElement = $('#input_width');
+const pixelCanvasElement = $('#pixel_canvas');
 var colorPickerValue = colorPickerElement.val();
 var gridHeightValue = gridHeightElement.val();
 var gridWidthValue = gridWidthElement.val();
@@ -9,20 +10,19 @@ var gridWidthValue = gridWidthElement.val();
 
 //TODO: create the structure of the grid according to the width and height given
 function makeGrid() {
-  //an empty grid structure
-  var gridStructure = "";
-  for(var i = 1; i <= gridHeightValue; i++) {
+  const table = document.getElementById("pixel_canvas");
+  for(let i = 1; i <= gridHeightValue; i++) {
     //opening table's row
-    gridStructure += "<tr>";
-    for(var j = 1; j <= gridWidthValue; j++) {
+    const row = table.insertRow(i-1);
+    for(let j = 1; j <= gridWidthValue; j++) {
       //adding all table's cols
-      gridStructure += "<td>&nbsp;</td>";
+      const cell = row.insertCell(j-1);
+      cell.innerHTML = "&nbsp;";
+      cell.addEventListener('click', function(){
+        $(this).css('background-color', colorPickerValue);
+      });
     }
-    //closing table's row
-    gridStructure += "</tr>";
   }
-  //adding the table structure to #pixel_canvas
-  $('#pixel_canvas').html(gridStructure);
 
 }
 
@@ -33,7 +33,7 @@ function makeGrid() {
 //******************************//
 
 //listen for click event on submit button
-$('[type=submit]').click(function(event) {
+$('#sizePicker').submit(function(event) {
   var alertText= "";
   //prevent submitting the form
   event.preventDefault();
@@ -67,7 +67,7 @@ colorPickerElement.change(function(){
   colorPickerValue = colorPickerElement.val();
 });
 
-//changing the td background for colorPickerValue
-$("#pixel_canvas").on('click','td', function() {
-  $(this).css('background-color', colorPickerValue);
-});
+// //changing the td background for colorPickerValue
+// pixelCanvasElement.on('click','td', function() {
+//   $(this).css('background-color', colorPickerValue);
+// });
