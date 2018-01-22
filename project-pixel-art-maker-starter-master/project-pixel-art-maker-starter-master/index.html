@@ -6,23 +6,40 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <header>
     <h1>Lab: Pixel Art Maker</h1>
+  </header>
+  <main>
+    <div class="pixel-art-container border-general-style">
+      <div class="tool-bar-container">
+        <div class="tool-bar border-general-style outside-shadow">
+          <h3>Tool Bar</h3>
+          <form id="sizePicker">
+              <p>Grid Height:</p>
+              <input type="number" id="input_height" name="height" value="1">
+              <p>Grid Width:</p>
+              <input type="number" id="input_width" name="width" value="1">
+              <input type="submit" class="border-general-style">
+          </form>
+          <h3>Pick A Color</h3>
+          <input type="color" id="colorPicker">
+        </div>
+      </div>
+      <div class="draw-area-container">
+        <table id="pixel_canvas" class="outside-shadow">
+        </table>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>
+      <a href="https://www.udacity.com/grow-with-google" target="_blank">Grow with Google Scholarship - Udacity - 2018 </a><br>
+      Project 3 - Pixel Art Maker <br>
+      <a href="https://discussions.udacity.com/u/angelcouso91/activity" target="_black">Angel M Couso Jiménez</a>
+    </p>
+  </footer>
 
-    <h2>Choose Grid Size</h2>
-    <form id="sizePicker">
-        Grid Height:
-        <input type="number" id="input_height" name="height" min="1" value="1">
-        Grid Width:
-        <input type="number" id="input_width" name="width" min="1" value="1">
-        <input type="submit">
-    </form>
 
-    <h2>Pick A Color</h2>
-    <input type="color" id="colorPicker">
-
-    <h2>Design Canvas</h2>
-    <table id="pixel_canvas">
-    </table>
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
