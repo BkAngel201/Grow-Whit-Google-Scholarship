@@ -10,6 +10,7 @@ var gridWidthValue = gridWidthElement.val();
 
 //TODO: create the structure of the grid according to the width and height given
 function makeGrid() {
+  pixelCanvasElement.empty();
   const table = document.getElementById("pixel_canvas");
   for(let i = 1; i <= gridHeightValue; i++) {
     //opening table's row
