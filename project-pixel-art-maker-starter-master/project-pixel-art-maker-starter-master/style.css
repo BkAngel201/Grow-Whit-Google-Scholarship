@@ -1,0 +1,107 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    height: 100vh;
+    margin: 0;
+    background: #e1f5fe;
+    color: #333;
+    box-shadow: inset 0 0 10px #555;
+}
+.tool-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70px;
+  background: #fafafa;
+  margin: 10px;
+  background-color: #fff;
+  transition: 1.5s;
+}
+
+input[type=number] {
+  width: 80%;
+}
+.title-bar,
+.popup-window-title {
+  padding: 8px 0;
+  background-color: #29b6f6;
+  margin-bottom: 5px;
+}
+.toggle-pos-button {
+  padding:8px 5px;
+  right: -25px;
+  border-radius: 0 100% 100% 0;
+  -moz-border-radius: 0 100% 100% 0;
+  -o-border-radius: 0 100% 100% 0;
+  -webkit-border-radius: 0 100% 100% 0;
+  background-color: #29b6f6;
+  position: absolute;
+}
+.toggle-pos-button:hover,
+.about-button:hover {
+  color: #fff;
+  background-color: #039be5;
+}
+.tool-bar.closed {
+  left: -80px;
+  transition: 1.5s;
+}
+.tools-button,
+.file-button {
+  float: left;
+  padding: 5px 0;
+  width: 50%;
+  color: #757575;
+}
+.tools-button:hover,
+.tools-button.selected,
+.file-button:hover {
+  background-color: #757575;
+  color: #fff;
+}
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: #616161;
+  float: left;
+  margin: 5px 0;
+}
+#colorPicker {
+  background-color: #fff;
+    border: none;
+    padding: 0;
+    margin: 0;
+    border-image-width: 0;
+    height: 40px;
+    width: 40px;
+    margin: 5px 0;
+}
+.about-button {
+  float: left;
+  display: inline-block;
+  width: 100%;
+  color: #333;
+  text-decoration: none;
+  padding: 5px 0;
+  background-color: #29b6f6;
+
+}
+.popup-window {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(255, 0, 0, 0.5);
+  visibility: hidden;
+}
+.popup-window-body {
+  width: 100%;
+  max-width: 500px;
+  background: #fff;
+  margin: auto;
+  margin-top: 80px;
+}
+.visible {
+  visibility: visible;
+}

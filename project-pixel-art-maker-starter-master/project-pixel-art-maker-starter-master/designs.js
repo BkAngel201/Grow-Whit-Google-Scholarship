@@ -1,3 +1,39 @@
+$(".toggle-pos-button").on('click',function(){
+  $(this).parent().toggleClass('closed');
+  $(this).children('i').toggleClass('fa-angle-double-right');
+});
+$(".tools-button").on('click',function(){
+  $(".tools-button").removeClass('selected');
+  $(this).toggleClass('selected');
+});
+$(".file-button").on('click',function(){
+
+  if($(this).children('i.fa-file')) {
+    $('.popup-window').toggleClass('visible');
+
+  }
+});
+
+$('.popup-window').on('click',function(){
+  $(this).toggleClass('visible');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //setting the starter value of the variables
 const colorPickerElement = $('#colorPicker');
 const gridHeightElement = $('#input_height');
