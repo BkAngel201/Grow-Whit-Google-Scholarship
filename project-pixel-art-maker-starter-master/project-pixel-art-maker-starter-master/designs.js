@@ -1,39 +1,3 @@
-$(".toggle-pos-button").on('click',function(){
-  $(this).parent().toggleClass('closed');
-  $(this).children('i').toggleClass('fa-angle-double-right');
-});
-$(".tools-button").on('click',function(){
-  $(".tools-button").removeClass('selected');
-  $(this).toggleClass('selected');
-});
-$(".file-button").on('click',function(){
-
-  if($(this).children('i.fa-file')) {
-    $('.popup-window').toggleClass('visible');
-
-  }
-});
-
-$('.popup-window').on('click',function(){
-  $(this).toggleClass('visible');
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //setting the starter value of the variables
 const colorPickerElement = $('#colorPicker');
 const gridHeightElement = $('#input_height');
@@ -42,6 +6,68 @@ const pixelCanvasElement = $('#pixel_canvas');
 var colorPickerValue = colorPickerElement.val();
 var gridHeightValue = gridHeightElement.val();
 var gridWidthValue = gridWidthElement.val();
+var backColorPickerValue = $('#backColorPicker').val();
+var gridColorPickerValue = $('#gridColorPicker').val();
+var toolSelected;
+
+//Style behavior
+$(".toggle-pos-button").on('click',function(){
+  $(this).parent().toggleClass('closed');
+  $(this).children('i').toggleClass('fa-angle-double-right');
+});
+$(".tools-button").on('click',function(){
+  $(".tools-button").removeClass('selected');
+  $(this).toggleClass('selected');
+  toolSelected = $(this).attr('tool');
+});
+$(".file-button").on('click',function(){
+  if($(this).attr('action') === "create") {
+    $('#'+$(this).attr('action')).toggleClass('visible');
+  } else if($(this).attr('action') === "reset") {
+    $('#'+$(this).attr('action')).toggleClass('visible');
+  }
+});
+$('.popup-window-close').on('click',function(){
+  $(this).parents('.popup-window').toggleClass('visible');
+});
+$('button.cancel').on('click',function(){
+  $(this).parents('.popup-window').toggleClass('visible');
+});
+$('button.accept').on('click',function(){
+  $(this).parents('.popup-window').toggleClass('visible');
+  $('td').css('background-color', backColorPickerValue);
+});
+
+$('input[type=color]').change(function(){
+  if($(this).attr('id') === "backColorPicker") {
+    //setting the background color of the table
+    //setting the backColorPickerValue when the #colorPicker change
+    $("table").css('background-color', $(this).val());
+    backColorPickerValue = $(this).val();
+  } else if($(this).attr('id') === "gridColorPicker") {
+    //setting the border color of the table
+    //setting the gridColorPickerValue when the #colorPicker change
+    $("td").css('border-color', $(this).val());
+    gridColorPickerValue = $(this).val();
+  } else if($(this).attr('id') === "colorPicker") {
+    //setting the colorPickerValue when the #colorPicker change
+    colorPickerValue = colorPickerElement.val();
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //TODO: create the structure of the grid according to the width and height given
@@ -53,11 +79,7 @@ function makeGrid() {
     const row = table.insertRow(i-1);
     for(let j = 1; j <= gridWidthValue; j++) {
       //adding all table's cols
-      const cell = row.insertCell(j-1);
-      cell.innerHTML = "&nbsp;";
-      cell.addEventListener('click', function(){
-        $(this).css('background-color', colorPickerValue);
-      });
+      row.insertCell(j-1);
     }
   }
 
@@ -74,6 +96,7 @@ $('#sizePicker').submit(function(event) {
   var alertText= "";
   //prevent submitting the form
   event.preventDefault();
+  $(this).parents('.popup-window').toggleClass('visible');
   //looking if the grid size are grater than 30 for height and 70 for width to prevent overflow on the page
   //looking for the height
   if (gridHeightElement.val() > 30) {
@@ -99,10 +122,17 @@ $('#sizePicker').submit(function(event) {
   }
 });
 
-//setting the colorPickerValue when the #colorPicker change
-colorPickerElement.change(function(){
-  colorPickerValue = colorPickerElement.val();
+pixelCanvasElement.on("click mousedown mouseover", "td", function(event){
+  event.preventDefault();
+  if (event.buttons == 1) {
+    if (toolSelected === "brush") {
+      $(event.target).css('background-color', colorPickerValue);
+    } else if (toolSelected === "eraser") {
+      $(event.target).css('background-color', backColorPickerValue);
+    }
+  }
 });
+
 
 // //changing the td background for colorPickerValue
 // pixelCanvasElement.on('click','td', function() {

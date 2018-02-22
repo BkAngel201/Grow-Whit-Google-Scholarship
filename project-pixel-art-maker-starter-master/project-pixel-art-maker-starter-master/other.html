@@ -11,31 +11,107 @@
   <div class="tool-bar">
     <a class="toggle-pos-button"><i class="fas fa-angle-double-left"></i></a>
     <div class="title-bar">Tools</div>
-    <a class="tools-button"><i class="fas fa-paint-brush"></i></a>
-    <a class="tools-button"><i class="fas fa-eraser"></i></a>
-    <a class="tools-button"><i class="fas fa-eye-dropper"></i></a>
+    <a class="tools-button" tool="brush"><i class="fas fa-paint-brush"></i></a>
+    <a class="tools-button" tool="eraser"><i class="fas fa-eraser"></i></a>
     <div class="divider"></div>
-    <a class="file-button"><i class="fas fa-file"></i></a>
-    <a class="file-button"><i class="far fa-file-excel"></i></a>
-    <a class="file-button"><i class="fas fa-save"></i></a>
-    <a class="file-button"><i class="fas fa-folder-open"></i></a>
+    <a class="file-button" action="create"><i class="fas fa-file"></i></a>
+    <a class="file-button" action="reset"><i class="far fa-file-excel"></i></a>
+    <a class="file-button" action="save"><i class="fas fa-save"></i></a>
+    <a class="file-button" action="open"><i class="fas fa-folder-open"></i></a>
     <div class="divider"></div>
     <input type="color" id="colorPicker">
     <div class="divider"></div>
     <a href="#" class="about-button">About</a>
     </div>
   </div>
-  <div class="popup-window">
+  <div class="popup-window visible" id="create">
     <div class="popup-window-body">
       <div class="popup-window-title">
         Set Grid Options
+        <a class="popup-window-close"><i class="fas fa-times-circle  fa-lg"></i></a>
       </div>
       <div class="popup-window-main">
-        asd
+        <div class="popup-window-section">
+          <form id="sizePicker">
+              <label>Grid Height:</label>
+              <input type="number" id="input_height" name="height" value="1" required>
+              <label>Grid Width:</label>
+              <input type="number" id="input_width" name="width" value="1" required>
+              <div class="popup-window-section">
+                <label><small>Back Color:</small></label>
+                <input type="color" value="#ffffff" id="backColorPicker">
+              </div>
+              <div class="popup-window-section">
+                <label><small>Grid Color:</small></label>
+                <input type="color" value="#e1f5fe" id="gridColorPicker">
+              </div>
+              <input type="submit" class="border-general-style" value="Create Grid">
+          </form>
+        </div>
+        <div class="popup-window-section">
+          <label>Grid Sample</label>
+          <table>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 
+  <div class="popup-window" id="reset">
+    <div class="popup-window-body">
+      <div class="popup-window-title">
+        Reset Grid
+        <a class="popup-window-close"><i class="fas fa-times-circle  fa-lg"></i></a>
+      </div>
+      <div class="popup-window-main">
+        <label>Do you really want reset your Grid to default Option?</label>
+        <div class="popup-window-section">
+          <button type="button" class="cancel">Cancel</button>
+        </div>
+        <div class="popup-window-section">
+          <button type="button" class="accept">Accept</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table id="pixel_canvas" class="outside-shadow">
+  </table>
   </div>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="designs.js"></script>
