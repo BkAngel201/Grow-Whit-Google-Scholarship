@@ -94,7 +94,8 @@ function makeGrid() {
       row.insertCell(j-1);
     }
   }
-
+$("table").css('background-color', backColorPickerValue);
+$("td").css('border-color', gridColorPickerValue);
 }
 
 //******************************//
