@@ -87,7 +87,7 @@ button:hover {
   text-decoration: none;
   padding: 5px 0;
   background-color: #29b6f6;
-
+  cursor: pointer;
 }
 .popup-window {
   position: fixed;
@@ -177,4 +177,17 @@ td {
   width: 15px;
   height: 15px;
   border: 2px solid #e1f5fe;
+}
+
+.project-name {
+    display: inline-block;
+    font-family: Monoton;
+    font-size: 45px;
+    margin: 0.2em;
+    background: -moz-linear-gradient(left, rgb(252,53,50) 0%, rgb(249,252,47) 17%, rgb(47,252,58) 34%, rgb(48,244,255) 51%, rgb(43,40,252) 68%, rgb(252,40,252) 85%, rgb(252,0,0) 100%);
+    background: -webkit-linear-gradient(left, rgb(252,53,50) 0%,rgb(249,252,47) 17%,rgb(47,252,58) 34%,rgb(48,244,255) 51%,rgb(43,40,252) 68%,rgb(252,40,252) 85%,rgb(252,0,0) 100%);
+    background: linear-gradient(to right, rgb(252,53,50) 0%,rgb(249,252,47) 17%,rgb(47,252,58) 34%,rgb(48,244,255) 51%,rgb(43,40,252) 68%,rgb(252,40,252) 85%,rgb(252,0,0) 100%);
+    color:transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
 }

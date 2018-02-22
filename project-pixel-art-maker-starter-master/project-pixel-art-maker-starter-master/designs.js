@@ -11,15 +11,20 @@ var gridColorPickerValue = $('#gridColorPicker').val();
 var toolSelected;
 
 //Style behavior
+//open and close the tool bar
 $(".toggle-pos-button").on('click',function(){
   $(this).parent().toggleClass('closed');
   $(this).children('i').toggleClass('fa-angle-double-right');
 });
+
+//tools button selection and set the selected tool
 $(".tools-button").on('click',function(){
   $(".tools-button").removeClass('selected');
   $(this).toggleClass('selected');
   toolSelected = $(this).attr('tool');
 });
+
+//open the popup windows for the specific file button
 $(".file-button").on('click',function(){
   if($(this).attr('action') === "create") {
     $('#'+$(this).attr('action')).toggleClass('visible');
@@ -27,9 +32,13 @@ $(".file-button").on('click',function(){
     $('#'+$(this).attr('action')).toggleClass('visible');
   }
 });
+
+//close the popup window with the x button
 $('.popup-window-close').on('click',function(){
   $(this).parents('.popup-window').toggleClass('visible');
 });
+
+//cancel and accept the reset grid function
 $('button.cancel').on('click',function(){
   $(this).parents('.popup-window').toggleClass('visible');
 });
@@ -37,6 +46,7 @@ $('button.accept').on('click',function(){
   $(this).parents('.popup-window').toggleClass('visible');
   $('td').css('background-color', backColorPickerValue);
 });
+
 
 $('input[type=color]').change(function(){
   if($(this).attr('id') === "backColorPicker") {
@@ -55,7 +65,9 @@ $('input[type=color]').change(function(){
   }
 });
 
-
+$('.about-button').on('click',function(){
+  $('.popup-window#about').toggleClass('visible');
+});
 
 
 
