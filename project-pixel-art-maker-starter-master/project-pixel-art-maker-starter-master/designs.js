@@ -87,12 +87,12 @@ $('.about-button').on('click',function(){
 //TODO: fix the height and width of the cell if the grid is biger than the scrwwn size to prevent overflowing
 function calcCellDimention() {
   //calculate if body's height - 10px of padding top and bottom is less than all the heigh of the grid, actual size + 2px of border x cant cells on the y axis + 2 to get some extra space
-if(parseInt($('body').height() - 20) < ((cellHeightAndWidth + 2) * gridHeightValue + 2)) {
+if(parseInt($('body').height() - 20) < ((cellHeightAndWidth + 1) * gridHeightValue + 2)) {
   // set the actual cell size to height space available on body divided by the cant of cells in the y axis - 2 to get some extra space
-  cellHeightAndWidth = (parseInt(($('body').height() - 20) / gridHeightValue)) - 2;
+  cellHeightAndWidth = (parseInt(($('body').height() - 20) / gridHeightValue)) - 1;
 }
 // the same of above but in the width or x axis
-if (parseInt($('body').width() - 20) < ((cellHeightAndWidth + 2) * gridWidthValue + 2)) {
+if (parseInt($('body').width() - 20) < ((cellHeightAndWidth + 1) * gridWidthValue + 2)) {
   cellHeightAndWidth = (parseInt(($('body').width() - 20) / gridWidthValue)) - 2;
 }
 
