@@ -177,6 +177,7 @@ td {
   width: 15px;
   height: 15px;
   border: 2px solid #e1f5fe;
+  padding: 0;
 }
 
 .project-name {

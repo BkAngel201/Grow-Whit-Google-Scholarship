@@ -3,12 +3,13 @@ const colorPickerElement = $('#colorPicker');
 const gridHeightElement = $('#input_height');
 const gridWidthElement = $('#input_width');
 const pixelCanvasElement = $('#pixel_canvas');
-var colorPickerValue = colorPickerElement.val();
-var gridHeightValue = gridHeightElement.val();
-var gridWidthValue = gridWidthElement.val();
-var backColorPickerValue = $('#backColorPicker').val();
-var gridColorPickerValue = $('#gridColorPicker').val();
-var toolSelected;
+let colorPickerValue = colorPickerElement.val();
+let gridHeightValue = gridHeightElement.val();
+let gridWidthValue = gridWidthElement.val();
+let backColorPickerValue = $('#backColorPicker').val();
+let gridColorPickerValue = $('#gridColorPicker').val();
+let cellHeightAndWidth = 10;
+let toolSelected;
 
 //Style behavior
 //open and close the tool bar
@@ -82,6 +83,22 @@ $('.about-button').on('click',function(){
 
 
 
+
+//TODO: fix the height and width of the cell if the grid is biger than the scrwwn size to prevent overflowing
+function calcCellDimention() {
+  //calculate if body's height - 10px of padding top and bottom is less than all the heigh of the grid, actual size + 2px of border x cant cells on the y axis + 2 to get some extra space
+if(parseInt($('body').height() - 20) < ((cellHeightAndWidth + 2) * gridHeightValue + 2)) {
+  // set the actual cell size to height space available on body divided by the cant of cells in the y axis - 2 to get some extra space
+  cellHeightAndWidth = (parseInt(($('body').height() - 20) / gridHeightValue)) - 2;
+}
+// the same of above but in the width or x axis
+if (parseInt($('body').width() - 20) < ((cellHeightAndWidth + 2) * gridWidthValue + 2)) {
+  cellHeightAndWidth = (parseInt(($('body').width() - 20) / gridWidthValue)) - 2;
+}
+
+}
+
+
 //TODO: create the structure of the grid according to the width and height given
 function makeGrid() {
   pixelCanvasElement.empty();
@@ -94,8 +111,11 @@ function makeGrid() {
       row.insertCell(j-1);
     }
   }
+calcCellDimention();
 $("table").css('background-color', backColorPickerValue);
 $("td").css('border-color', gridColorPickerValue);
+$('#pixel_canvas td').css("height", cellHeightAndWidth + "px");
+$('#pixel_canvas td').css("width", cellHeightAndWidth + "px");
 }
 
 //******************************//
@@ -106,33 +126,14 @@ $("td").css('border-color', gridColorPickerValue);
 
 //listen for click event on submit button
 $('#sizePicker').submit(function(event) {
-  var alertText= "";
   //prevent submitting the form
   event.preventDefault();
   $(this).parents('.popup-window').toggleClass('visible');
-  //looking if the grid size are grater than 30 for height and 70 for width to prevent overflow on the page
-  //looking for the height
-  if (gridHeightElement.val() > 30) {
-    alertText += "Grid Heigth changed from " + gridHeightElement.val() + " to 30.\n";
-    gridHeightValue = 30;
-    gridHeightElement.val(30);
-  } else {
     gridHeightValue = gridHeightElement.val();
-  }
-  //looking for the width
-  if (gridWidthElement.val() > 60) {
-    alertText += "Grid Width changed from " + gridWidthElement.val() + " to 60.";
-    gridWidthValue = 60;
-    gridWidthElement.val(60);
-  } else {
     gridWidthValue = gridWidthElement.val();
-  }
   //calling the makeGrid function to draw our table
   makeGrid();
   //if the width or height were corrected, show the information to the user
-  if (alertText !== "") {
-    alert("Some changes has being done for prevent overflowing the Drawing Area:\n" + alertText);
-  }
 });
 
 pixelCanvasElement.on("click mousedown mouseover", "td", function(event){
