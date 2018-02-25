@@ -17,6 +17,7 @@ body {
   margin: 10px;
   background-color: #fff;
   transition: 1.5s;
+  cursor: default;
 }
 
 input[type=number] {
@@ -37,6 +38,7 @@ input[type=number] {
   -webkit-border-radius: 0 100% 100% 0;
   background-color: #29b6f6;
   position: absolute;
+  cursor: pointer;
 }
 .toggle-pos-button:hover,
 .about-button:hover,
@@ -55,12 +57,28 @@ button:hover {
   padding: 5px 0;
   width: 50%;
   color: #757575;
+  position: relative;
 }
 .tools-button:hover,
 .tools-button.selected,
 .file-button:hover {
   background-color: #757575;
   color: #fff;
+  cursor: pointer;
+}
+.popup-info-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: .7em;
+  color: #757575 !important;
+  border: 1px solid #757575;
+  background: #fff;
+  padding: 2px 5px;
+  display: inline-block;
+  visibility: hidden;
+  text-transform: capitalize;
+  z-index: 226;
 }
 .divider {
   height: 1px;
@@ -97,6 +115,7 @@ button:hover {
   width: 100vw;
   background-color: rgba(225, 245, 254, 0.8);
   visibility: hidden;
+  cursor: default;
 }
 .popup-window-body {
   width: 100%;
@@ -105,9 +124,6 @@ button:hover {
   margin: auto;
   margin-top: 80px;
   position: relative;
-}
-.visible {
-  visibility: visible;
 }
 .popup-window-close {
   position: absolute;
@@ -192,3 +208,9 @@ td {
     -webkit-background-clip: text;
     background-clip: text;
 }
+
+
+ /* Extra Classes */
+ .visible {
+   visibility: visible;
+ }
