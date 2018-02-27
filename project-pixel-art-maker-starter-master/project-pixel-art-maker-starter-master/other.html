@@ -23,8 +23,7 @@
     <a class="file-button" action="reset" alt="popup"><i class="far fa-file-excel"></i></a>
 
     <a class="file-button" action="save" alt="popup"><i class="fas fa-save"></i></a>
-    <!--     Next features
-    <a class="file-button" action="open"><i class="fas fa-folder-open"></i></a> -->
+    <a class="file-button" action="load" alt="popup"><i class="fas fa-folder-open"></i></a>
     <div class="divider"></div>
     <input type="color" id="colorPicker">
     <div class="divider"></div>
@@ -158,8 +157,27 @@
     </div>
   </div>
 
+  <div class="popup-window" id="load">
+    <div class="popup-window-body">
+      <div class="popup-window-title">
+        Load a saved Pixel Art
+        <a class="popup-window-close"><i class="fas fa-times-circle  fa-lg"></i></a>
+      </div>
+      <div class="popup-window-main">
+        <form id="loadGrid">
+            <label>File name:</label>
+            <textarea id="loadFileContent" readonly></textarea>
+            <input type="file" id="loadFile">
+            <input type="submit" value="Load Pixel Art File">
+        </form>
+
+      </div>
+    </div>
+  </div>
+
   <table id="pixel_canvas" class="outside-shadow">
   </table>
+
 </div>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="designs.js"></script>

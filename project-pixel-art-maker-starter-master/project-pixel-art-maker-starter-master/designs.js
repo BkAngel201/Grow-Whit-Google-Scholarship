@@ -3,6 +3,9 @@ const colorPickerElement = $('#colorPicker');
 const gridHeightElement = $('#input_height');
 const gridWidthElement = $('#input_width');
 const pixelCanvasElement = $('#pixel_canvas');
+const backColorPickerElement= $('#backColorPicker');
+const gridColorPickerElement = $('#gridColorPicker');
+
 let colorPickerValue = colorPickerElement.val();
 let gridHeightValue = gridHeightElement.val();
 let gridWidthValue = gridWidthElement.val();
@@ -41,12 +44,12 @@ function makeGrid() {
     }
   }
 calcCellDimention();
+//change all visial properties to match with the design selected
 $("table").css('background-color', backColorPickerValue);
 $("td").css('border-color', gridColorPickerValue);
 pixelCanvasElement.find('td').attr('backgroundColor', backColorPickerValue);
 $('#pixel_canvas td').css("height", cellHeightAndWidth + "px");
 $('#pixel_canvas td').css("width", cellHeightAndWidth + "px");
-saveGridJSON();
 }
 
 //TODO: create a Jquery Object to export all necessary elements to save the grid work
@@ -75,6 +78,44 @@ function saveGridJSON() {
   //export the output var into text form
 return JSON.stringify(output, null, '\t');
 }
+
+//TODO: Set every var to the loaded values and print the loaded grid
+function loadGridJSON(fileContent) {
+  let JSONObject;
+  //try to convert the file content value with $.parseJson, and if it can be done return false to let know it to the user
+  try {
+    JSONObject = $.parseJSON(fileContent);
+  } catch(e) {
+    return false;
+  }
+    // set general values
+  backColorPickerValue = JSONObject.tableProperties.backgroundColor;
+  gridColorPickerValue = JSONObject.tableProperties.gridColor;
+  gridWidthValue = JSONObject.tableProperties.gridWidth;
+  gridHeightValue = JSONObject.tableProperties.gridHeight;
+  cellHeightAndWidth = JSONObject.tableProperties.cellHeightAndWidth;
+
+  // if any of the important vars are missing, the file may be not be the original one, and then prevent of working with it
+  if (backColorPickerValue == undefined || gridColorPickerValue == undefined || gridWidthValue == undefined || gridHeightValue == undefined || cellHeightAndWidth == undefined ) {
+    return false;
+  } else {
+    //make the grid with the general variables
+    makeGrid();
+    //go trough every single cell and change the color if is needed
+    $.each($('#pixel_canvas tr'), function(index, value) {
+      $.each(this.cells, function(subindex, subval) {
+        if (JSONObject.rows[index][subindex] !== undefined) {
+          $(subval).attr("backgroundColor",JSONObject.rows[index][subindex]);
+          $(subval).css("background-color",JSONObject.rows[index][subindex])
+        }
+      });
+    });
+    //if everything was go, return true to close the popup window
+    return true;
+  }
+}
+
+
 
 //******************************//
 //                              //
@@ -108,6 +149,19 @@ $("#saveGrid").submit(function(event){
   $(this).css("display", "none");
 });
 
+$("#loadGrid").submit(function(event){
+  event.preventDefault();
+  //if all was good close the popup windows.
+  if(loadGridJSON($("#loadFileContent").val())) {
+    $(this).parents(".popup-window").toggleClass("visible");
+  } else {
+    //if not let know to the user that file is not a good one to load the grid
+    $("#loadFileContent").val("");
+    alert("The file you are trying to load does not contain all the parameters needed to load a previous saved Pixel Art Grid. Try it again.");
+  }
+
+});
+
 $('#downloadElement').on("click",function(){
   $(this).parents('.popup-window').toggleClass('visible');
 });
@@ -130,6 +184,15 @@ pixelCanvasElement.on("mousedown mouseover", "td", function(event){
   }
 });
 
+$("#loadFile").on("change",function(){
+  let file = $(this)[0].files[0];
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    let content = e.target.result;
+    $("#loadFileContent").val(content);
+  }
+  reader.readAsText(file);
+});
 
 //Style behavior
 //open and close the tool bar
