@@ -3,11 +3,11 @@
 <head>
     <title>Pixel Art Maker!</title>
     <meta charset="UTF-8">
+    <link rel="shortcut icon"  type="image/png" href="https://s26.postimg.org/k4lblpezt/favicon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monoton">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon"  type="image/png" href="./favicon.png">
 
 </head>
 <body>
@@ -21,8 +21,9 @@
     <div class="divider"></div>
     <a class="file-button" action="create" alt="popup"><i class="fas fa-file"></i></a>
     <a class="file-button" action="reset" alt="popup"><i class="far fa-file-excel"></i></a>
-<!--     Next features
-    <a class="file-button" action="save"><i class="fas fa-save"></i></a>
+
+    <a class="file-button" action="save" alt="popup"><i class="fas fa-save"></i></a>
+    <!--     Next features
     <a class="file-button" action="open"><i class="fas fa-folder-open"></i></a> -->
     <div class="divider"></div>
     <input type="color" id="colorPicker">
@@ -102,7 +103,7 @@
     <div class="popup-window-body">
       <div class="popup-window-title">
         Reset Grid
-        <a class="popup-window-close"><i class="fas fa-times-circle  fa-lg"></i></a>
+        <a class="popup-window-close"><i class="fas fa-times-circle fa-lg"></i></a>
       </div>
       <div class="popup-window-main">
         <label>Do you really want reset your Grid to default Option?</label>
@@ -127,6 +128,32 @@
         <p><a href="https://www.udacity.com/grow-with-google" target="_blank">Grow with Google Scholarship - Udacity - 2018 </a></p>
         <p>Project 3 - Pixel Art Maker</p>
         <p><a href="https://discussions.udacity.com/u/angelcouso91/activity" target="_black">Angel M Couso Jiménez</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-window" id="save">
+    <div class="popup-window-body">
+      <div class="popup-window-title">
+        Save Actual Pixel Art
+        <a class="popup-window-close"><i class="fas fa-times-circle  fa-lg"></i></a>
+      </div>
+      <div class="popup-window-main">
+        <form id="saveGrid">
+            <label>File name:</label>
+            <input type="text" pattern="[a-zA-Z0-9]+" name="saveFileName" id="saveFileName" title="Just Letter and Numbers" placeholder="Enter the file name" required>
+            <label>File extention:</label>
+            <select name="fileExtention" id="saveFileExtention">
+              <option selected value="JSON">
+                JSON
+              </option>
+              <option value="txt">
+                TXT
+              </option>
+            </select>
+            <input type="submit" value="Prepare File to Download">
+        </form>
+        <a href="#" id="downloadElement" style="display: none">Download File</a>
       </div>
     </div>
   </div>

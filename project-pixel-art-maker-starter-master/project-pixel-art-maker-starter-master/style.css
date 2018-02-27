@@ -19,10 +19,6 @@ body {
   transition: 1.5s;
   cursor: default;
 }
-
-input[type=number] {
-  width: 80%;
-}
 .title-bar,
 .popup-window-title {
   padding: 8px 0;
@@ -43,7 +39,8 @@ input[type=number] {
 .toggle-pos-button:hover,
 .about-button:hover,
 .popup-window-main input[type=submit]:hover,
-button:hover {
+button:hover,
+a#downloadElement:hover {
   color: #fff;
   background-color: #039be5;
 }
@@ -153,22 +150,35 @@ button:hover {
   padding: 10px;
   box-sizing: border-box;
 }
+#save .popup-window-main label{
+  margin: 10px 0 5px;
+}
+#save .popup-window-main {
+  padding: 0 20px 20px;
+}
 .popup-window-main input,
 .popup-window-main label,
-button {
+.popup-window-main select,
+button,
+a#downloadElement {
   width: 100%;
   display: block;
   margin-top: 5px;
   box-sizing: border-box;
+  text-transform: capitalize;
 }
 .popup-window-main input[type=submit],
-button {
+button,
+a#downloadElement {
   display: block;
   border: none;
   padding: 10px;
   margin-top: 10px;
   background-color: #29b6f6;
   color: #333;
+  font-size: .8em;
+  text-decoration: none;
+  line-height: 1.2em;
 }
 button.cancel {
   background-color: #ef5350;
@@ -213,4 +223,7 @@ td {
  /* Extra Classes */
  .visible {
    visibility: visible;
+ }
+ .invisible {
+   visibility: hidden;
  }

@@ -46,9 +46,35 @@ $("td").css('border-color', gridColorPickerValue);
 pixelCanvasElement.find('td').attr('backgroundColor', backColorPickerValue);
 $('#pixel_canvas td').css("height", cellHeightAndWidth + "px");
 $('#pixel_canvas td').css("width", cellHeightAndWidth + "px");
+saveGridJSON();
 }
 
-
+//TODO: create a Jquery Object to export all necessary elements to save the grid work
+function saveGridJSON() {
+  //save the global variables like colors width and height into output
+  let output = {
+    tableProperties: {
+      "gridWidth": gridWidthValue,
+      "gridHeight": gridHeightValue,
+      "backgroundColor" : backColorPickerValue,
+      "gridColor": gridColorPickerValue,
+      "cellHeightAndWidth" : cellHeightAndWidth,
+    },
+    "rows": [],
+  };
+  //look every col in every row so extract his actual color
+  $.each($('#pixel_canvas tr'), function(index, value) {
+    let cols = {};
+    $.each(this.cells, function(subindex, subval) {
+      if ($(subval).attr("backgroundColor") !== backColorPickerValue) {
+        cols[subindex] = $(subval).attr("backgroundColor");
+      }
+    });
+    output["rows"][index] = cols;
+  });
+  //export the output var into text form
+return JSON.stringify(output, null, '\t');
+}
 
 //******************************//
 //                              //
@@ -66,6 +92,24 @@ $('#sizePicker').submit(function(event) {
   //calling the makeGrid function to draw our table
   makeGrid();
   //if the width or height were corrected, show the information to the user
+});
+
+$("#saveGrid").submit(function(event){
+  //prevent submitting the form
+  event.preventDefault();
+  let downloadElement = $("#downloadElement");
+  // store the output of all the variables value
+  let textOutput = saveGridJSON();
+  let file = $("#saveFileName").val() + "." + $("#saveFileExtention").val();
+  //set all the attributes in the download element
+  downloadElement.attr("href", 'data:text/plain;charset=utf-8,' + encodeURIComponent(textOutput));
+  downloadElement.attr("download", file);
+  downloadElement.css("display","inline-block");
+  $(this).css("display", "none");
+});
+
+$('#downloadElement').on("click",function(){
+  $(this).parents('.popup-window').toggleClass('visible');
 });
 
 pixelCanvasElement.on("mousedown mouseover", "td", function(event){
@@ -136,11 +180,19 @@ $("a[alt=popup]").on('mouseout', function(event){
 
 //open the popup windows for the specific file button
 $(".file-button").on('click',function(){
-  if($(this).attr('action') === "create") {
     $('#'+$(this).attr('action')).toggleClass('visible');
-  } else if($(this).attr('action') === "reset") {
-    $('#'+$(this).attr('action')).toggleClass('visible');
-  }
+    //reset to default visibility all elements in the save grid popup windws
+    if($(this).attr('action') === "save") {
+      $("#saveGrid").css("display", "block");
+      $("#downloadElement").css("display", "none");
+      $("#saveFileName").val("");
+      $("#saveFileExtention").val("JSON");
+    }
+});
+
+//open the popup windows for the about button
+$('.about-button').on('click',function(){
+  $('.popup-window#about').toggleClass('visible');
 });
 
 //close the popup window with the x button
@@ -175,10 +227,6 @@ $('input[type=color]').change(function(){
   }
 });
 
-
-$('.about-button').on('click',function(){
-  $('.popup-window#about').toggleClass('visible');
-});
 
 //event listener for keydown to select tools with specific keys
 $(document).on("keydown", function(event){
