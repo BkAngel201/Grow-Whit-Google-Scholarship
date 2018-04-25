@@ -1,3 +1,7 @@
+$(function(){
+  makeGrid();
+  $("[tool=brush]").click();
+});
 //setting the starter value of the variables
 const colorPickerElement = $('#colorPicker');
 const gridHeightElement = $('#input_height');
@@ -11,7 +15,7 @@ let gridHeightValue = gridHeightElement.val();
 let gridWidthValue = gridWidthElement.val();
 let backColorPickerValue = $('#backColorPicker').val();
 let gridColorPickerValue = $('#gridColorPicker').val();
-let cellHeightAndWidth = 10;
+let cellHeightAndWidth = 15;
 let toolSelected;
 
 
@@ -166,7 +170,7 @@ $('#downloadElement').on("click",function(){
   $(this).parents('.popup-window').toggleClass('visible');
 });
 
-pixelCanvasElement.on("mousedown mouseover", "td", function(event){
+pixelCanvasElement.on("mousedown mouseover touchstart touchmove", "td", function(event){
   event.preventDefault();
   if (event.buttons == 1) {
     if (toolSelected === "brush") {
@@ -208,11 +212,11 @@ $(".tools-button").on('click',function(){
   $(this).toggleClass('selected');
   toolSelected = $(this).attr('tool')
   if(toolSelected === "brush") {
-    url = "https://s26.postimg.org/cv9eddj4p/brush.png";
+    url = "http://res.cloudinary.com/dxdktguhc/image/upload/v1523670878/brush.png";
   } else if(toolSelected === "eraser") {
-    url = "https://s26.postimg.org/thqyn1c8p/eraser.png";
+    url = "http://res.cloudinary.com/dxdktguhc/image/upload/v1523671009/eraser.png";
   } else if(toolSelected === "dropper") {
-    url = "https://s26.postimg.org/w0cnn5d89/dropper.png";
+    url = "http://res.cloudinary.com/dxdktguhc/image/upload/v1523670878/dropper.png";
   }
   $("body").css("cursor","url(" + url + "), default");
 });
